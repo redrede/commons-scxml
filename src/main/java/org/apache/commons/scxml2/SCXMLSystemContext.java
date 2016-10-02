@@ -54,14 +54,13 @@ public class SCXMLSystemContext implements Context, Serializable {
     /**
      * The set of protected system variables names
      */
-    private static final Set<String> PROTECTED_NAMES = new HashSet<String>(Arrays.asList(
-            new String[] {EVENT_KEY, SESSIONID_KEY, SCXML_NAME_KEY, IOPROCESSORS_KEY, X_KEY}
+    private static final Set<String> PROTECTED_NAMES = new HashSet<>(Arrays.asList(
+            new String[]{EVENT_KEY, SESSIONID_KEY, SCXML_NAME_KEY, IOPROCESSORS_KEY, X_KEY}
     ));
 
     /**
      * The wrapped system context
      */
-
     private Context systemContext;
 
     /**
@@ -79,13 +78,12 @@ public class SCXMLSystemContext implements Context, Serializable {
         if (this.systemContext != null) {
             // replace systemContext
             systemContext.getVars().putAll(this.systemContext.getVars());
-        }
-        else {
+        } else {
             // create Platform variables map
-            systemContext.setLocal(X_KEY, new HashMap<String, Object>());
+            systemContext.setLocal(X_KEY, new HashMap<>());
         }
         this.systemContext = systemContext;
-        this.protectedVars = Collections.unmodifiableMap(systemContext.getVars());
+        this.protectedVars = systemContext.getVars();
     }
 
     /**
@@ -132,7 +130,7 @@ public class SCXMLSystemContext implements Context, Serializable {
 
     @Override
     public Map<String, Object> getVars() {
-        return protectedVars;
+        return Collections.unmodifiableMap(protectedVars);
     }
 
     @Override
@@ -151,11 +149,12 @@ public class SCXMLSystemContext implements Context, Serializable {
     }
 
     /**
-     * @return The Platform specific system variables map stored under the {@link #X_KEY _x} root system variable
+     * @return The Platform specific system variables map stored under the
+     * {@link #X_KEY _x} root system variable
      */
     @SuppressWarnings("unchecked")
     public Map<String, Object> getPlatformVariables() {
-        return (Map<String, Object>)get(X_KEY);
+        return (Map<String, Object>) get(X_KEY);
     }
 
     /**

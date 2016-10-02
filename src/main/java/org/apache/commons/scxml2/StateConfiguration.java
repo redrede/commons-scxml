@@ -35,23 +35,21 @@ public class StateConfiguration implements Serializable {
     /**
      * The states that are currently active.
      */
-    private final Set<EnterableState> activeStates = new HashSet<EnterableState>();
-    private final Set<EnterableState> activeStatesSet = Collections.unmodifiableSet(activeStates);
+    private final Set<EnterableState> activeStates = new HashSet<>();
 
     /**
      * The atomic states that are currently active.
      */
-    private final Set<EnterableState> atomicStates = new HashSet<EnterableState>();
-    private final Set<EnterableState> atomicStatesSet = Collections.unmodifiableSet(atomicStates);
+    private final Set<EnterableState> atomicStates = new HashSet<>();
 
     /**
      * Get the active states
      *
-     * @return active states including simple states and their
-     *         complex ancestors up to the root.
+     * @return active states including simple states and their complex ancestors
+     * up to the root.
      */
     public Set<EnterableState> getActiveStates() {
-        return  activeStatesSet;
+        return Collections.unmodifiableSet(this.activeStates);
     }
 
     /**
@@ -60,33 +58,35 @@ public class StateConfiguration implements Serializable {
      * @return Returns the atomic states - simple (leaf) states only.
      */
     public Set<EnterableState> getStates() {
-        return  atomicStatesSet;
+        return Collections.unmodifiableSet(atomicStates);
     }
 
     /**
-     * Enter an active state
-     * If the state is atomic also record it add it to the current states
+     * Enter an active state If the state is atomic also record it add it to the
+     * current states
+     *
      * @param state state to enter
      */
     public void enterState(final EnterableState state) {
         if (!activeStates.add(state)) {
-            throw new IllegalStateException("State "+state.getId()+" already added.");
+            throw new IllegalStateException("State " + state.getId() + " already added.");
         }
         if (state.isAtomicState()) {
             if (!atomicStates.add(state)) {
-                throw new IllegalStateException("Atomic state "+state.getId()+" already added.");
+                throw new IllegalStateException("Atomic state " + state.getId() + " already added.");
             }
         }
     }
 
     /**
-     * Exit an active state
-     * If the state is atomic also remove it from current states
+     * Exit an active state If the state is atomic also remove it from current
+     * states
+     *
      * @param state state to exit
      */
     public void exitState(final EnterableState state) {
         if (!activeStates.remove(state)) {
-            throw new IllegalStateException("State "+state.getId()+" not active.");
+            throw new IllegalStateException("State " + state.getId() + " not active.");
         }
         atomicStates.remove(state);
     }
