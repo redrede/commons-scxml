@@ -18,6 +18,7 @@ package org.apache.commons.scxml2;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -68,6 +69,8 @@ public class StateConfiguration implements Serializable {
      * @param state state to enter
      */
     public void enterState(final EnterableState state) {
+        //Included date of last entry in the state
+        state.setLastEntryDate(new Date());
         if (!activeStates.add(state)) {
             throw new IllegalStateException("State " + state.getId() + " already added.");
         }

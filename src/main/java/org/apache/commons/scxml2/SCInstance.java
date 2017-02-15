@@ -417,6 +417,10 @@ public class SCInstance implements Serializable {
         }
         return globalContext;
     }
+    
+    public Set<EnterableState> getStates(){
+        return contexts.keySet();
+    }
 
     /**
      * Get the context for an EnterableState or create one if not created before.

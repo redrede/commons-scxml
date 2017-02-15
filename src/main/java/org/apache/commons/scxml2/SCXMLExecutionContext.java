@@ -533,4 +533,9 @@ public class SCXMLExecutionContext implements SCXMLIOProcessor {
     public boolean hasPendingInternalEvent() {
         return !internalEventQueue.isEmpty();
     }
+
+    @Override
+    public void triggerEvent(TriggerEvent event) throws ModelException {
+        internalEventQueue.add(event);
+    }
 }

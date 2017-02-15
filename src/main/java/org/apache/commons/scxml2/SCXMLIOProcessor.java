@@ -16,6 +16,8 @@
  */
 package org.apache.commons.scxml2;
 
+import org.apache.commons.scxml2.model.ModelException;
+
 /**
  * The SCXML I/O Processor provides the interface for either an internal process or an external system or invoked child
  * SCXML process ({@link org.apache.commons.scxml2.invoke.Invoker}) to send events into the SCXML processor queue.
@@ -58,4 +60,15 @@ public interface SCXMLIOProcessor {
      * @param event the event to send
      */
     void addEvent(TriggerEvent event);
+    
+    /**
+     * Convenience method when only one event needs to be triggered.
+     *
+     * @param evt
+     *            the external events which triggered during the last
+     *            time quantum
+     * @throws org.apache.commons.scxml2.model.ModelException
+     */
+    public void triggerEvent(final TriggerEvent evt)
+            throws ModelException;
 }

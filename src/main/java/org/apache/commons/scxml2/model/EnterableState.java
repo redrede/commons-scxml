@@ -17,12 +17,24 @@
 package org.apache.commons.scxml2.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
- * An abstract base class for state elements in SCXML that can be entered, such as State, Parallel or Final.
+ * An abstract base class for state elements in SCXML that can be entered, such
+ * as State, Parallel or Final.
  */
 public abstract class EnterableState extends TransitionTarget implements DocumentOrder {
+
+    /**
+     * Date of last entry into state
+     */
+    private Date lastEntryDate;
+    
+    /**
+     * Date of entry into state
+     */
+    private List<Date> onEntriesDate;
 
     /**
      * The document order of this state
@@ -30,14 +42,14 @@ public abstract class EnterableState extends TransitionTarget implements Documen
     private int order;
 
     /**
-     * List of optional OnEntry elements holding executable content to be run upon
-     * entering this transition target.
+     * List of optional OnEntry elements holding executable content to be run
+     * upon entering this transition target.
      */
     private List<OnEntry> onEntries;
 
     /**
-     * List of optional OnExit elements holding executable content to be run upon
-     * exiting this transition target.
+     * List of optional OnExit elements holding executable content to be run
+     * upon exiting this transition target.
      */
     private List<OnExit> onExits;
 
@@ -45,6 +57,7 @@ public abstract class EnterableState extends TransitionTarget implements Documen
         super();
         onEntries = new ArrayList<OnEntry>();
         onExits = new ArrayList<OnExit>();
+        onEntriesDate = new ArrayList<Date>();
     }
 
     /**
@@ -58,6 +71,7 @@ public abstract class EnterableState extends TransitionTarget implements Documen
 
     /**
      * Sets the document order of this state
+     *
      * @param order the document order
      * @see DocumentOrder
      */
@@ -106,9 +120,42 @@ public abstract class EnterableState extends TransitionTarget implements Documen
     /**
      * Check whether this is an atomic state.
      * <p>
-     * An atomic state is a state of type Final or of type State without children,
+     * An atomic state is a state of type Final or of type State without
+     * children,
      * </p>
+     *
      * @return Returns true if this is an atomic state.
      */
     public abstract boolean isAtomicState();
+
+    /**
+     * Get the date of last entry into the state
+     *
+     * @return Returns the date of last entry into the state
+     */
+    public Date getLastEntryDate() {
+        return lastEntryDate;
+    }
+
+    
+     /**
+     * Sets the date of last entry into the state
+     *
+     * @param lastEntryDate
+     */
+    public void setLastEntryDate(Date lastEntryDate) {
+        this.onEntriesDate.add(lastEntryDate);
+        this.lastEntryDate = lastEntryDate;        
+    }
+
+    
+    /**
+     * Get the list of dates of entry into the state
+     *
+     * @return Returns the date of the list of dates of entry into the state
+     */
+    public List<Date> getOnEntriesDate() {
+        return onEntriesDate;
+    }   
+
 }

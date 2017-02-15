@@ -22,12 +22,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.scxml2.EventDispatcher;
 import org.apache.commons.scxml2.SCXMLIOProcessor;
 import org.apache.commons.scxml2.TriggerEvent;
+import org.apache.commons.scxml2.model.ModelException;
 
 /**
  * <p>EventDispatcher implementation that can schedule <code>delay</code>ed
@@ -93,11 +96,15 @@ public class SimpleDispatcher implements EventDispatcher, Serializable {
          */
         @Override
         public void run() {
-            timers.remove(id);
-            target.addEvent(new TriggerEvent(event, TriggerEvent.SIGNAL_EVENT, payload));
-            if (log.isDebugEnabled()) {
-                log.debug("Fired event '" + event + "' as scheduled by "
-                        + "<send> with id '" + id + "'");
+            try {
+                timers.remove(id);
+                target.triggerEvent(new TriggerEvent(event, TriggerEvent.SIGNAL_EVENT, payload));
+                if (log.isDebugEnabled()) {
+                    log.debug("Fired event '" + event + "' as scheduled by "
+                            + "<send> with id '" + id + "'");
+                }
+            } catch (ModelException ex) {
+                log.error(ex);
             }
         }
     }

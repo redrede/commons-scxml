@@ -437,6 +437,7 @@ public class SCXMLExecutor implements SCXMLIOProcessor {
      * </p>
      * @param evt an external event
      */
+    @Override
     public void addEvent(final TriggerEvent evt) {
         if (evt != null) {
             externalEventQueue.add(evt);
@@ -466,6 +467,7 @@ public class SCXMLExecutor implements SCXMLIOProcessor {
      * @throws ModelException in case there is a fatal SCXML object
      *            model problem.
      */
+    @Override
     public void triggerEvent(final TriggerEvent evt)
             throws ModelException {
         addEvent(evt);
