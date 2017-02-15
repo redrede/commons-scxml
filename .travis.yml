@@ -1,2 +1,9 @@
 language: java
 jdk: oraclejdk8
+deploy:
+  provider: releases
+  api_key:
+    secure: xCVWu0otBjqUye8An1YAI4OtcQrCw2IP/2xlkNop8Mqd3XoF3gVQjCAoff5ZYjbfulY4BnQDEiH8geBtHIwYOAdMxUuTG/yMTKUfI4LCq13LFms8wq7Sg/yeTs/ZcNzXJbsLwbMJX6n3H3mkEfj/SyKoTc96ITzSWsEgpRrMWk3m6rBFPDUh/Ci5lzYCUXkGhswUbkYWJfsp7O8SLWSt0ieVvmqoI5EYRzH32WCpUR3oRFR8LVJrRaULFbS5jjICeC5Yo2HXI7KXavScZlVm9VkWm+oneVN4Puk6z4IWN0uDEJ3oHtosfRzph7elNRgOLCTT+7zLrzd/0rCzxUQyp4RA9ujGyLFYC/WxcwNW4YZNFLMiqD6hjJf/Hj33K5grbST85zh42R1vk3i23vj31aH3v6adBPWeKDztIkq/gUQDVwIqqP0Y3FIYaIdjj+9bBuGS9BVj8rwIsEgoWkyQ6TdKuRP1f+r+PyO+6anKearHzBn6/DjGMGojWBfDgpT80YpRc6EiXXC3/FFZ36rBWuMXHGCAWa3qeYzu6kembYsknhxc8hPIFn45DtXrvb1KUaIobBA69noH+sjdUYOn4YfzGF2MN1Q+fgBfoJxN2JkivbuwK8ZNgmYZWRfCsi9HjhUXvH4Prvsx0zpPkFGKz7f+rYfGytu490s5OTHKoiI=
+  file: target/commons-scxml2-2.0-SNAPSHOT.jar
+  on:
+    repo: redrede/commons-scxml
