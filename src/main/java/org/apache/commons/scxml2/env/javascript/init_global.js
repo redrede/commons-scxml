@@ -97,6 +97,13 @@ Object.defineProperties(this, {
                 _scxmlProtected("_event.invokeid")
             },
             get data() {
+                if(_scxmlSystemContext._event.data){
+             		if(typeof(_scxmlSystemContext._event.data) == "string" ){
+ 		            	if(_scxmlSystemContext._event.data.startsWith("{")){
+ 		            		return JSON.parse(_scxmlSystemContext._event.data);
+ 		            	}
+             		}
+             	}
                 return _scxmlSystemContext._event.data||undefined
             },
             set data(val) {

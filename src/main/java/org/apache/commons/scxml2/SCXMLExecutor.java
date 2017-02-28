@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.scxml2.invoke.Invoker;
@@ -49,7 +48,7 @@ public class SCXMLExecutor implements SCXMLIOProcessor {
     /**
      * The Logger for the SCXMLExecutor.
      */
-    private Log log = LogFactory.getLog(SCXMLExecutor.class);
+    private transient final Log log = LogFactory.getLog(SCXMLExecutor.class);
 
     /**
      * Parent SCXMLExecutor

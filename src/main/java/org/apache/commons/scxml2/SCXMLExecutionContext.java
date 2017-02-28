@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.scxml2.env.SimpleDispatcher;
@@ -52,7 +51,7 @@ public class SCXMLExecutionContext implements SCXMLIOProcessor {
     /**
      * SCXML Execution Logger for the application.
      */
-    private Log appLog = LogFactory.getLog(SCXMLExecutionContext.class);
+    private transient Log appLog = LogFactory.getLog(SCXMLExecutionContext.class);
 
     /**
      * The action execution context instance, providing restricted access to this execution context
