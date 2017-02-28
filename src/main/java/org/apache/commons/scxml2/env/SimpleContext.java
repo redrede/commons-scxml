@@ -78,9 +78,9 @@ public class SimpleContext implements Context, Serializable {
         this.systemContext = parent instanceof SCXMLSystemContext
                 ? (SCXMLSystemContext) parent : parent != null ? parent.getSystemContext() : null;
         if (initialVars == null) {
-            this.vars = new HashMap<>();
+            setVars(new HashMap<String, Object>());
         } else {
-            this.vars = initialVars;
+            setVars(this.vars = initialVars);
         }
     }
 
